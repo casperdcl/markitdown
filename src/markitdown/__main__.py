@@ -35,15 +35,15 @@ parser.add_argument(
     metavar="outfilename",
     help="if unspecified, defaults to stdout",
 )
-parser.add_argument("--llm-client", choices={"OpenAI"}, help="default None")
-parser.add_argument("--llm-client-url", help="base URL for --llm-client")
-parser.add_argument("--llm-model", help="required for --llm-client")
+parser.add_argument("--llm-model", help="e.g. gpt-4o")
+parser.add_argument("--llm-client-url", help="base URL for OpenAI LLM client")
 
 
 def main(args=None):
     args = parser.parse_args(args)
-    if args.llm_client == "OpenAI":
+    if args.llm_model:
         from openai import OpenAI
+
         llm_client = OpenAI(base_url=args.llm_client_url)
     else:
         llm_client = None
