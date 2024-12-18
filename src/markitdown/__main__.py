@@ -37,6 +37,13 @@ parser.add_argument(
 )
 parser.add_argument("--llm-model", help="e.g. gpt-4o")
 parser.add_argument("--llm-client-url", help="base URL for OpenAI LLM client")
+parser.add_argument(
+    "-H",
+    "--llm-client-header",
+    nargs="*",
+    default=[],
+    help="may be specified multiple times",
+)
 
 
 def main(args=None):
@@ -44,7 +51,11 @@ def main(args=None):
     if args.llm_model:
         from openai import OpenAI
 
-        llm_client = OpenAI(base_url=args.llm_client_url)
+        headers = {}
+        for header in args.llm_client_header:
+            key, value = header.split(":", 1)
+            headers[key] = value.lstrip()
+        llm_client = OpenAI(base_url=args.llm_client_url, default_headers=headers)
     else:
         llm_client = None
     markitdown = MarkItDown(llm_client=llm_client, llm_model=args.llm_model)
