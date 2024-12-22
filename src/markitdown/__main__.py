@@ -27,19 +27,22 @@ parser.add_argument(
     help="show the version number and exit",
 )
 parser.add_argument(
-    "filename", nargs="?", help="if unspecified, defaults to stdin"
+    "filename", metavar="FILENAME", nargs="?", help="if unspecified, defaults to stdin"
 )
 parser.add_argument(
     "-o",
     "--output",
-    metavar="outfilename",
+    metavar="OUTFILENAME",
     help="if unspecified, defaults to stdout",
 )
-parser.add_argument("--llm-model", help="e.g. gpt-4o")
-parser.add_argument("--llm-client-url", help="base URL for OpenAI LLM client")
+parser.add_argument("--llm-model", metavar="MODEL", help="e.g. gpt-4o")
+parser.add_argument(
+    "--llm-client-url", metavar="URL", help="base URL for OpenAI LLM client"
+)
 parser.add_argument(
     "-H",
     "--llm-client-header",
+    metavar="HEADER",
     nargs="*",
     default=[],
     help="may be specified multiple times",
