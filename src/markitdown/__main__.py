@@ -26,9 +26,7 @@ parser.add_argument(
     version=f"%(prog)s {__version__}",
     help="show the version number and exit",
 )
-parser.add_argument(
-    "filename", nargs="?", help="if unspecified, defaults to stdin"
-)
+parser.add_argument("filename", nargs="?", help="if unspecified, defaults to stdin")
 parser.add_argument(
     "-o",
     "--output",
